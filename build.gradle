@@ -52,6 +52,7 @@ dependencies {
         implementation "ch.qos.logback:logback-classic:${logback_classic_version}"
         testImplementation "org.assertj:assertj-core:${assertj_core_version}"
         testImplementation "net.serenity-bdd:serenity-screenplay-rest:${serenity_version}"
+        testImplementation "io.github.bonigarcia:webdrivermanager:5.5.3"
     }
 }
 

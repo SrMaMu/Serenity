@@ -3,6 +3,7 @@ package example.stepdefinitions;
 import example.model.Producto;
 import example.questions.carrito.ProductosCarrito;
 import example.tasks.compra.AgregarAlCarrito;
+import example.tasks.compra.EliminarCarrito;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -34,11 +35,22 @@ public class CarritoDeCompraStepDefinitions {
                 nombreItem -> actor.attemptsTo(AgregarAlCarrito.item(nombreItem))
         );
     }
+    @When("{actor} elimina el item {string} del carrito de compra")
+    public void elimina_item_carrito_compra(Actor actor, String item) {
+        actor.attemptsTo(EliminarCarrito.item(item));
+        /*   itemsCarritos.remove(item); */
+    }
     @Then("verifica todos los items agregados")
     public void verifica_items_agregados() {
         OnStage.theActorInTheSpotlight().attemptsTo(
                 Click.on(CARRITO_COMPRA),
                 Ensure.that(ProductosCarrito.MostradosEnPantalla()).containsElementsFrom(itemsCarritos)
+        );
+    }
+    @Then("verifica que el item {string} ya no esté en el carrito")
+    public void verifica_item_eliminado(String item) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                Ensure.that(ProductosCarrito.MostradosEnPantalla()).doesNotContain(item)
         );
     }
 
