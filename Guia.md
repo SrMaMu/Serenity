@@ -6,7 +6,28 @@ Este proyecto es un template para pruebas automatizadas utilizando Serenity BDD 
 
 La estructura del proyecto sigue las convenciones de Serenity BDD y Cucumber, organizando los archivos de la siguiente manera:
 
-
+Serenity_Starter/
+├── .github/workflows/check.yml           # Configuración de GitHub Actions para CI
+├── gradle/wrapper/gradle-wrapper.properties # Configuración de Gradle Wrapper
+├── src/
+│   ├── main/java/example/...            # Código fuente principal (si aplica)
+│   └── test/
+│       ├── java/example/
+│       │   ├── model/                     # Clases de modelo
+│       │   ├── questions/                 # Clases de preguntas (verificaciones)
+│       │   ├── stepdefinitions/           # Clases de definiciones de pasos de Cucumber
+│       │   ├── tasks/                     # Clases de tareas (acciones)
+│       │   ├── userinterfaces/            # Clases de interfaces de usuario (selectores)
+│       │   └── CucumberTestSuite.java   # Clase de ejecución de pruebas Cucumber
+│       └── resources/
+│           ├── features/                  # Archivos de características Cucumber (.feature)
+│           ├── junit-platform.properties  # Configuración de JUnit Platform
+│           ├── logback-test.xml           # Configuración de logging
+│           └── serenity.conf              # Configuración de Serenity BDD
+├── build.gradle                         # Archivo de configuración de Gradle
+├── pom.xml                              # Archivo de configuración de Maven
+├── serenity.properties                  # Propiedades de Serenity BDD
+└── README.md                            # Archivo de descripción del proyecto
 
 
 ### Descripción Detallada de las Carpetas Clave
@@ -32,65 +53,83 @@ La estructura del proyecto sigue las convenciones de Serenity BDD y Cucumber, or
 
 ## Guía para la Creación de un Archivo de Custom Instructions en la Carpeta `.github`
 
-GitHub Copilot puede ser personalizado para seguir las convenciones y el estilo de tu proyecto. Para ello, puedes crear un archivo de "custom instructions" y colocarlo en la carpeta `.github`.
+GitHub Copilot puede ser personalizado para seguir las convenciones y el estilo de tu proyecto. Para ello, puedes crear un archivo de "custom instructions" en formato Markdown (`.md`) y colocarlo en la carpeta `.github`. Este archivo servirá como guía para Copilot al interactuar en el chat, permitiéndole entender mejor el contexto del proyecto y ofrecer sugerencias más relevantes.
 
 ### Pasos para crear el archivo:
 
-1.  **Crear el archivo**: En la carpeta `.github` de tu proyecto, crea un nuevo archivo llamado `copilot.toml` o `copilot.json`.
-2.  **Definir las instrucciones**: Dentro del archivo, define las instrucciones que Copilot debe seguir. Estas instrucciones pueden incluir:
+1.  **Crear el archivo**: En la carpeta `.github` de tu proyecto, crea un nuevo archivo llamado `copilot-instructions.md`.
 
-    *   Convenciones de nombres
-    *   Estilo de código
-    *   Patrones de diseño preferidos
-    *   Bibliotecas y frameworks utilizados
-    *   Ejemplos de código
+2.  **Definir las instrucciones**: Dentro del archivo, escribe en lenguaje natural las instrucciones que Copilot debe seguir. Estas instrucciones pueden incluir:
 
-### Ejemplo de `copilot.toml`
+    *   **Descripción del proyecto**: Breve resumen del propósito y alcance del proyecto.
+    *   **Convenciones de nombres**: Reglas para nombrar clases, métodos, variables, etc.
+    *   **Estilo de código**: Preferencias de formato, indentación, etc.
+    *   **Patrones de diseño preferidos**: Uso del patrón Screenplay, etc.
+    *   **Bibliotecas y frameworks utilizados**: Serenity BDD, Cucumber, JUnit, AssertJ, etc.
+    *   **Ejemplos de código**: Fragmentos de código que ilustren las mejores prácticas del proyecto.
+    *   **Consideraciones específicas**: Cualquier otra información relevante para Copilot.
 
-```toml
-# Archivo: .github/copilot.toml
+### Ejemplo de `copilot-instructions.md`
 
-[instructions]
-  style = "Siga las convenciones de estilo del proyecto Serenity BDD con Cucumber."
-  conventions = "Utilice el patrón Screenplay para organizar las pruebas. Prefiera selectores dinámicos cuando sea posible."
-  libraries = "Utilice las bibliotecas Serenity BDD, Cucumber, JUnit y AssertJ."
-  examples = """
-  Ejemplo de tarea:
-  ```java
-  package example.tasks;
+```markdown
+# Instrucciones para GitHub Copilot en el Proyecto Serenity BDD con Cucumber
 
-  import net.serenitybdd.screenplay.Task;
-  import net.serenitybdd.screenplay.actions.Click;
-  import net.serenitybdd.screenplay.targets.Target;
+Este proyecto utiliza Serenity BDD con Cucumber para pruebas automatizadas. Siga estas instrucciones al interactuar en el chat:
 
-  public class RealizarBusqueda {
-      private final String termino;
+*   **Descripción del proyecto**: Este proyecto es un template para pruebas automatizadas de aplicaciones web y APIs.
 
-      public RealizarBusqueda(String termino) {
-          this.termino = termino;
-      }
+*   **Convenciones de nombres**:
+    *   Las clases de tareas deben terminar con "Task".
+    *   Las clases de preguntas deben terminar con "Question".
+    *   Los selectores de la interfaz de usuario deben ser definidos como `Target`.
 
-      public static Task por(String termino) {
-          return Task.where("{0} realiza una búsqueda por el término: " + termino,
-              Click.on(Target.the("Resultado de búsqueda").locatedBy("//a[contains(text(),'" + termino + "')]"))
-          );
-      }
-  }
-```
+*   **Estilo de código**:
+    *   Utilice indentación de 4 espacios.
+    *   Asegúrese de que el código sea legible y bien documentado.
 
+*   **Patrones de diseño preferidos**:
+    *   Utilice el patrón Screenplay para organizar las pruebas.
+    *   Prefiera selectores dinámicos cuando sea posible.
 
-### Ejemplo de `copilot.json`
+*   **Bibliotecas y frameworks utilizados**:
+    *   Serenity BDD
+    *   Cucumber
+    *   JUnit
+    *   AssertJ
 
-```json
-{
-  "instructions": {
-    "style": "Siga las convenciones de estilo del proyecto Serenity BDD con Cucumber.",
-    "conventions": "Utilice el patrón Screenplay para organizar las pruebas. Prefiera selectores dinámicos cuando sea posible.",
-    "libraries": "Utilice las bibliotecas Serenity BDD, Cucumber, JUnit y AssertJ.",
-    "examples": "Ejemplo de tarea:\n```java\npackage example.tasks;\n\nimport net.serenitybdd.screenplay.Task;\nimport net.serenitybdd.screenplay.actions.Click;\nimport net.serenitybdd.screenplay.targets.Target;\n\npublic class RealizarBusqueda {\n    private final String termino;\n\n    public RealizarBusqueda(String termino) {\n        this.termino = termino;\n    }\n\n    public static Task por(String termino) {\n        return Task.where(\"{0} realiza una búsqueda por el término: \" + termino,\n        Click.on(Target.the(\"Resultado de búsqueda\").locatedBy(\"//a[contains(text(),'\" + termino + \"')]"))\n        );\n    }\n}\n```"
-  }
-}
-```
+*   **Ejemplos de código**:
+
+    ```java
+    package example.tasks;
+
+    import net.serenitybdd.screenplay.Task;
+    import net.serenitybdd.screenplay.actions.Click;
+    import net.serenitybdd.screenplay.targets.Target;
+
+    public class RealizarBusqueda implements Task {
+        private final String termino;
+
+        public RealizarBusqueda(String termino) {
+            this.termino = termino;
+        }
+
+        public static RealizarBusqueda por(String termino) {
+            return new RealizarBusqueda(termino);
+        }
+
+        @Override
+        public <T extends Actor> void performAs(T actor) {
+            actor.attemptsTo(
+                Click.on(Target.the("Resultado de búsqueda").locatedBy("//a[contains(text(),'" + termino + "')]"))
+            );
+        }
+    }
+    ```
+
+*   **Consideraciones específicas**:
+    *   Al generar selectores, prefiera XPath o CSS selectores que sean robustos y fáciles de mantener.
+    *   Asegúrese de que las tareas sean atómicas y reutilizables.
+
 3. **Guardar los cambios:** Guarda el archivo en la carpeta .github de tu proyecto.
 
 4. **Comprobar los resultados:** Copilot debería empezar a seguir las instrucciones definidas en el archivo
