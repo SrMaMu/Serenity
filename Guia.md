@@ -5,7 +5,7 @@ Este proyecto es un template para pruebas automatizadas utilizando Serenity BDD 
 ## Estructura del Proyecto
 
 La estructura del proyecto sigue las convenciones de Serenity BDD y Cucumber, organizando los archivos de la siguiente manera:
-
+```
 Serenity_Starter/
 ├── .github/workflows/check.yml           # Configuración de GitHub Actions para CI
 ├── gradle/wrapper/gradle-wrapper.properties # Configuración de Gradle Wrapper
@@ -28,7 +28,7 @@ Serenity_Starter/
 ├── pom.xml                              # Archivo de configuración de Maven
 ├── serenity.properties                  # Propiedades de Serenity BDD
 └── README.md                            # Archivo de descripción del proyecto
-
+```
 
 ### Descripción Detallada de las Carpetas Clave
 
