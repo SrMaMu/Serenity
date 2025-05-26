@@ -1,5 +1,5 @@
 Feature: Verificar productos de compra
-  @si
+
   Scenario: Verificar todos los productos disponibles para la compra
     Given Juan ingresa a la pagina de compra
     When Juan agrega los items al carrito de compra
@@ -12,7 +12,8 @@ Feature: Verificar productos de compra
     Then verifica todos los items agregados
     When Juan elimina el item "Sauce Labs Backpack" del carrito de compra
     Then verifica que el item "Sauce Labs Backpack" ya no esté en el carrito
-
+    When Juan intenta agregar el item "Jugo de Manzana" al carrito de compra
+    Then verifica que se muestre un error indicando que el item "Jugo de Manzana" no está disponible
 
   Scenario: Verificar todos los productos disponibles para la compra y precio
     Given Juan ingresa a la pagina de compra

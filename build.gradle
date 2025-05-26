@@ -53,6 +53,12 @@ dependencies {
         testImplementation "org.assertj:assertj-core:${assertj_core_version}"
         testImplementation "net.serenity-bdd:serenity-screenplay-rest:${serenity_version}"
         testImplementation "io.github.bonigarcia:webdrivermanager:5.5.3"
+        testImplementation 'io.cucumber:cucumber-java:7.15.0'
+        testImplementation 'io.cucumber:cucumber-junit:7.15.0'
+        implementation 'net.serenity-bdd:serenity-core:3.6.21'
+        implementation 'net.serenity-bdd:serenity-screenplay:3.6.21'
+        implementation 'net.serenity-bdd:serenity-screenplay-webdriver:3.6.21'
+        testImplementation 'io.appium:java-client:8.5.1'
     }
 }
 

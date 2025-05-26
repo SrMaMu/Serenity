@@ -40,6 +40,12 @@ public class CarritoDeCompraStepDefinitions {
         actor.attemptsTo(EliminarCarrito.item(item));
         /*   itemsCarritos.remove(item); */
     }
+    @When("{actor} intenta agregar el item {string} al carrito de compra")
+    public void intentaAgregarItemNoDisponible(Actor actor, String item) {
+        actor.attemptsTo(
+            Ensure.that(PageElement.withCSSClass("inventory_item").containingText(item)).isNotDisplayed()
+        );
+    }
     @Then("verifica todos los items agregados")
     public void verifica_items_agregados() {
         OnStage.theActorInTheSpotlight().attemptsTo(
@@ -53,12 +59,19 @@ public class CarritoDeCompraStepDefinitions {
                 Ensure.that(ProductosCarrito.MostradosEnPantalla()).doesNotContain(item)
         );
     }
+    @Then("verifica que se muestre un error indicando que el item {string} no está disponible")
+    public void verificaErrorItemNoDisponible(String item) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+            Ensure.that(PageElement.withCSSClass("error_message")
+                    .containingText("El item " + item + " no está disponible")).isDisplayed()
+        );
+    }
 
     @DataTableType
     public Producto producto(Map<String, String> datosProducto){
         return new Producto(datosProducto.get("Nombre"),datosProducto.get("Precio"));
     }
-
+    // mejorar la legibilidad del codigo
     @Then("verificas catalogo con nombre y precio de producto")
     public void verificas_catalogo_con_nombre_y_precio_de_producto(List<Producto> productoRecibido) {
 
